@@ -1,0 +1,12 @@
+valac \
+    test-tcl.vala \
+    tcl.vapi \
+    -o test-tcl \
+    --save-temps \
+    -v \
+    --pkg gtk+-3.0 \
+    -X tclHacks.h \
+    -X -I/usr/include/tcl8.5/ \
+    -X -ltcl8.5 \
+    -X -Wall \
+    -X -lm
