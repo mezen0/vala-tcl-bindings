@@ -1,7 +1,5 @@
 using Tcl;
 
-
-
 class Test : GLib.Object {
 
     public static int get_max (Tcl.Interp interp, string[] args) {
@@ -33,6 +31,11 @@ class Test : GLib.Object {
         obj.append_string ("  test");
         stdout.printf ("string object : %s\n", obj.get_string ());
 
+        Tcl.Namespace ns = new Tcl.Namespace (interp, "NS");
+        Tcl.Namespace ns2 = interp.create_namespace ("NS2");
+        int res = ns.export (interp, "A", true);
+        stdout.printf ("res: %i\n", res);
+
         int init = interp.init ();
 
         if (init == Tcl.Result.OK) {
@@ -60,8 +63,6 @@ class Test : GLib.Object {
             """;
 
             interp.eval (script);
-
-            //interp.get_string_result ();
         }
         return 0;
     }
